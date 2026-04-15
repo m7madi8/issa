@@ -1,0 +1,11 @@
+{
+  "rewrites": [
+    { "source": "/franchise", "destination": "/" },
+    { "source": "/franchise/", "destination": "/" },
+    { "source": "/membership", "destination": "/" },
+    { "source": "/membership/", "destination": "/" },
+    { "source": "/rewards", "destination": "/" },
+    { "source": "/rewards/", "destination": "/" }
+  ]
+}
+

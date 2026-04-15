@@ -1,0 +1,12 @@
+.scroll-reveal {
+  display: block;
+}
+
+.scroll-reveal-text {
+  display: block;
+}
+
+.word {
+  display: inline-block;
+  transform-origin: 50% 100%;
+}

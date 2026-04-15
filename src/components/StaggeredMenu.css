@@ -1,0 +1,359 @@
+.lux-menu {
+  --lux-panel-width: clamp(280px, 38vw, 440px);
+  display: inline-flex;
+  position: relative;
+  z-index: 2147483646;
+  pointer-events: auto;
+}
+
+.lux-menu--fixed {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  z-index: 2147483646;
+  display: block;
+  pointer-events: none;
+}
+
+.lux-menu__trigger {
+  position: relative;
+  z-index: 2147483647;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 3rem;
+  padding: 0.8rem 1rem 0.8rem 1.2rem;
+  border: none;
+  border-radius: 999px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(248, 248, 248, 0.9)),
+    rgba(255, 255, 255, 0.96);
+  color: #111111;
+  box-shadow: 0 12px 28px rgba(17, 17, 17, 0.06);
+  cursor: pointer;
+  pointer-events: auto;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  font-weight: 700;
+  transition: color 180ms ease;
+  backdrop-filter: blur(18px);
+}
+
+.lux-menu:not(.lux-menu--fixed) .lux-menu__trigger {
+  margin-top: -0.35rem;
+}
+
+.lux-menu--fixed .lux-menu__trigger {
+  position: fixed;
+  top: 0.45rem;
+  right: 1rem;
+}
+
+.lux-menu[data-position='left'] .lux-menu__trigger {
+  left: 1rem;
+  right: auto;
+}
+
+.lux-menu--fixed[data-position='left'] .lux-menu__trigger {
+  left: 1rem;
+  right: auto;
+}
+
+.lux-menu__trigger:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(225, 29, 46, 0.14), 0 20px 48px rgba(17, 17, 17, 0.12);
+}
+
+.lux-menu__triggerLabel {
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+}
+
+.lux-menu__icon {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1rem;
+  height: 1rem;
+  flex: 0 0 1rem;
+}
+
+.lux-menu__line {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 100%;
+  height: 2px;
+  border-radius: 999px;
+  background: currentColor;
+  transform: translate(-50%, -50%);
+}
+
+.lux-menu__line--vertical {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.lux-menu__overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483645;
+  border: 0;
+  padding: 0;
+  background:
+    radial-gradient(circle at 82% 18%, rgba(225, 29, 46, 0.08), transparent 20%),
+    rgba(255, 255, 255, 0.72);
+  opacity: 0;
+  pointer-events: none;
+  cursor: pointer;
+  backdrop-filter: blur(16px);
+}
+
+.lux-menu[data-open] .lux-menu__overlay {
+  pointer-events: auto;
+}
+
+.lux-menu__panel {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 2147483646;
+  width: var(--lux-panel-width);
+  max-width: 100vw;
+  background:
+    radial-gradient(circle at top right, rgba(225, 29, 46, 0.08), transparent 24%),
+    radial-gradient(circle at 18% 18%, rgba(17, 17, 17, 0.02), transparent 18%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.99) 0%, rgba(250, 250, 250, 0.96) 100%);
+  color: #111111;
+  border-left: 1px solid rgba(17, 17, 17, 0.08);
+  box-shadow: -32px 0 90px rgba(17, 17, 17, 0.1);
+  pointer-events: auto;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.lux-menu[data-position='left'] .lux-menu__panel {
+  left: 0;
+  right: auto;
+  border-left: 0;
+  border-right: 1px solid rgba(17, 17, 17, 0.08);
+  box-shadow: 32px 0 90px rgba(17, 17, 17, 0.1);
+}
+
+.lux-menu__panelInner {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  padding: 6.2rem 1.4rem 1.5rem;
+}
+
+.lux-menu__brand {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(17, 17, 17, 0.08);
+}
+
+.lux-menu__logo {
+  width: 3.6rem;
+  object-fit: contain;
+  filter: drop-shadow(0 14px 26px rgba(0, 0, 0, 0.24));
+}
+
+.lux-menu__sectionTitle {
+  margin: 0;
+  color: rgba(17, 17, 17, 0.62);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  transform-origin: left center;
+}
+
+.lux-menu__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.lux-menu__itemWrap {
+  overflow: hidden;
+}
+
+.lux-menu__item {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  color: #111111;
+  text-decoration: none;
+  line-height: 1;
+  letter-spacing: -0.06em;
+  text-transform: uppercase;
+  font-size: clamp(2.1rem, 5.8vw, 4rem);
+  font-weight: 700;
+}
+
+.lux-menu__item:hover {
+  color: #111111;
+}
+
+.lux-menu__itemLabel {
+  position: relative;
+  display: inline-block;
+  transform-origin: left bottom;
+}
+
+.lux-menu__list[data-numbering] .lux-menu__item::after {
+  counter-increment: luxItem;
+  content: counter(luxItem, decimal-leading-zero);
+  position: relative;
+  top: -0.2rem;
+  color: var(--lux-accent, #e11d2e);
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  opacity: 0.86;
+}
+
+.lux-menu__list[data-numbering] {
+  counter-reset: luxItem;
+}
+
+.lux-menu__socials {
+  margin-top: 0.25rem;
+  padding-top: 0;
+  display: grid;
+  gap: 0.65rem;
+}
+
+.lux-menu__socialList {
+  display: grid;
+  gap: 0.7rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.lux-menu__socialLink {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem 1rem;
+  border-radius: 18px;
+  color: #111111;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(247, 247, 247, 0.9));
+  border: 1px solid rgba(17, 17, 17, 0.08);
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  box-shadow: 0 12px 28px rgba(17, 17, 17, 0.06);
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    color 180ms ease,
+    border-color 180ms ease,
+    opacity 180ms ease;
+}
+
+.lux-menu__socialLink::after {
+  content: '↗';
+  color: var(--lux-accent, #e11d2e);
+  font-size: 0.95em;
+  line-height: 1;
+}
+
+.lux-menu__socialLink:hover,
+.lux-menu__socialLink:focus-visible {
+  color: #111111;
+  outline: none;
+  transform: translateY(-1px);
+  border-color: rgba(225, 29, 46, 0.18);
+  box-shadow: 0 16px 32px rgba(17, 17, 17, 0.08);
+}
+
+.lux-menu__socialList:hover .lux-menu__socialLink {
+  opacity: 0.45;
+}
+
+.lux-menu__socialList:hover .lux-menu__socialLink:hover,
+.lux-menu__socialList:focus-within .lux-menu__socialLink:focus-visible {
+  opacity: 1;
+}
+
+@media (min-width: 900px) {
+  .lux-menu--fixed .lux-menu__trigger {
+    top: 0.55rem;
+    right: 1rem;
+    min-height: 3.15rem;
+    padding-inline: 1.25rem;
+  }
+
+  .lux-menu[data-position='left'] .lux-menu__trigger {
+    left: 1rem;
+    right: auto;
+  }
+
+  .lux-menu__panelInner {
+    padding-inline: 2rem;
+  }
+}
+
+@media (max-width: 720px) {
+  .lux-menu {
+    --lux-panel-width: 100vw;
+  }
+
+  .lux-menu__item {
+    /* تقليل حجم الخط حتى "Rewards Program" ما ينفصل كلمة بكلمة */
+    font-size: clamp(1.55rem, 6.6vw, 2.7rem);
+    letter-spacing: -0.055em;
+    white-space: nowrap;
+  }
+
+  .lux-menu__itemLabel {
+    white-space: nowrap;
+  }
+
+  /* عند العناوين الطويلة اللي بتنكسر سطرين (مثل "REWARDS PROGRAM") رقم العدّاد الحالي
+     بيطلع على خط النهاية (آخر سطر) وبصير بعيد بصرياً. نثبّت الرقم داخل نفس العنصر. */
+  .lux-menu__itemWrap {
+    justify-self: start;
+  }
+
+  .lux-menu__item {
+    align-items: flex-start;
+    width: fit-content;
+    padding-right: 0;
+    gap: 0.75rem;
+  }
+
+  .lux-menu__list[data-numbering] .lux-menu__item::after {
+    position: relative;
+    top: -0.15rem;
+    right: auto;
+    margin-left: 0.55rem;
+    font-size: 0.83rem;
+    letter-spacing: 0.12em;
+  }
+
+  .lux-menu__panelInner {
+    padding-top: 5.8rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lux-menu__trigger,
+  .lux-menu__socialLink {
+    transition-duration: 0.01ms !important;
+  }
+}

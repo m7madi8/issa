@@ -1,0 +1,206 @@
+/* Focal shelf — بدون خلفية خارجية؛ الصنف التالي في الزاوية اليمنى */
+
+.focal-shelf {
+  width: 100%;
+  max-width: min(420px, 100%);
+  margin-inline: auto;
+  position: relative;
+  z-index: 1;
+}
+
+.focal-shelf__stage {
+  position: relative;
+  width: 100%;
+  min-height: min(44vh, 340px);
+  overflow: visible;
+  cursor: grab;
+  /* عمودي للصفحة، أفقي يُدار بعد تمييز الاتجاه في JS */
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.focal-shelf__stage:active {
+  cursor: grabbing;
+}
+
+.focal-shelf__current {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  min-height: min(42vh, 320px);
+  padding-bottom: 0.25rem;
+  will-change: transform, filter;
+  backface-visibility: hidden;
+}
+
+.focal-shelf__peek {
+  position: absolute;
+  z-index: 3;
+  width: min(38vw, 150px);
+  max-width: 42%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  pointer-events: none;
+  transform-origin: 80% 95%;
+  will-change: transform, filter;
+  backface-visibility: hidden;
+}
+
+.focal-shelf__peek--next {
+  right: 0;
+  bottom: 0;
+  transform-origin: 95% 100%;
+  transform: translate(10%, 12%) scale(0.42);
+  filter: blur(12px) grayscale(0.68) saturate(0.3);
+  opacity: 0.65;
+}
+
+.focal-shelf__peek--prev {
+  left: 0;
+  bottom: 0;
+  transform-origin: 5% 100%;
+  transform: translate(-10%, 12%) scale(0.42);
+  filter: blur(12px) grayscale(0.68) saturate(0.3);
+  opacity: 0.55;
+}
+
+.focal-shelf__peek img {
+  width: 100%;
+  height: auto;
+  max-height: min(22vh, 160px);
+  object-fit: contain;
+  object-position: center bottom;
+  filter: drop-shadow(0 10px 20px rgba(17, 17, 17, 0.1));
+}
+
+.focal-shelf__peek-arch {
+  position: absolute;
+  bottom: 18%;
+  left: 50%;
+  translate: -50% 0;
+  width: 130%;
+  aspect-ratio: 1.1 / 0.65;
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.focal-shelf__arch-wrap {
+  position: absolute;
+  bottom: 12%;
+  left: 50%;
+  translate: -50% 0;
+  width: 118%;
+  max-width: 340px;
+  aspect-ratio: 1.15 / 0.72;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.focal-shelf__arch {
+  position: absolute;
+  inset: 0;
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  opacity: 0.92;
+  transform-origin: 50% 100%;
+  transition: opacity 0.12s ease, transform 0.12s ease;
+}
+
+.focal-shelf__img-wrap {
+  position: relative;
+  z-index: 1;
+  width: 88%;
+  max-width: 220px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  transform-origin: 50% 85%;
+}
+
+.focal-shelf__img {
+  width: 100%;
+  height: auto;
+  max-height: min(38vh, 280px);
+  object-fit: contain;
+  object-position: center bottom;
+  user-select: none;
+  pointer-events: none;
+  filter: drop-shadow(0 16px 28px rgba(17, 17, 17, 0.12));
+}
+
+.focal-shelf__caption {
+  position: relative;
+  z-index: 4;
+  margin-top: clamp(0.65rem, 2vh, 1rem);
+  min-height: 3.4em;
+  width: 100%;
+  max-width: 18rem;
+  margin-inline: auto;
+  animation: focal-shelf-caption-in 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes focal-shelf-caption-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 6px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .focal-shelf__caption {
+    animation: none;
+  }
+}
+
+.focal-shelf__caption-inner {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  text-align: center;
+}
+
+.focal-shelf__name {
+  margin: 0;
+  font-size: clamp(1.05rem, 3.2vw, 1.35rem);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #111111;
+  line-height: 1.15;
+}
+
+.focal-shelf__price-row {
+  margin: 0.35rem 0 0;
+  font-size: clamp(0.78rem, 2.1vw, 0.88rem);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: #111111;
+}
+
+.focal-shelf__price-main {
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.focal-shelf__price-cents {
+  color: var(--accent, #e11d2e);
+  font-weight: 800;
+}
+
+.focal-shelf__each {
+  margin-left: 0.35em;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  font-size: 0.92em;
+  color: rgba(17, 17, 17, 0.55);
+}
